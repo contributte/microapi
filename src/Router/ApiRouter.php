@@ -5,14 +5,13 @@ namespace Minetro\Api\Router;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Minetro\Api\ApiRequest;
-use Minetro\Api\Route\Route;
-use Nette\Application\IRouter;
+use Minetro\Api\Route;
 use Nette\Application\Request;
 use Nette\Http\IRequest;
 use Nette\Http\Url;
 use Nette\NotImplementedException;
 
-class ApiRouter implements IRouter
+class ApiRouter implements Router
 {
 
 	/** @var Route[] */
@@ -88,6 +87,14 @@ class ApiRouter implements IRouter
 		$routeInfo = $dispatcher->dispatch($httpRequest->getMethod(), $httpRequest->getUrl()->getRelativeUrl());
 
 		return $routeInfo;
+	}
+
+	/**
+	 * @return Route[]
+	 */
+	public function getRoutes()
+	{
+		return $this->routes;
 	}
 
 }

@@ -1,9 +1,10 @@
 <?php
 namespace Minetro\Api\DI;
 
-use Minetro\Api\ApiDispatcherFactory;
-use Minetro\Api\ControllerFactory;
-use Minetro\Api\Route\ApiRouteBuilder;
+use Minetro\Api\Controller\ControllerFactory;
+use Minetro\Api\Dispatcher\ApiDispatcherFactory;
+use Minetro\Api\RouteBuilder\ApiRouteBuilder;
+use Minetro\Api\RouteBuilder\SimpleRouteBuilder;
 use Minetro\Api\Router\ApiRouter;
 use Nette\DI\CompilerExtension;
 
@@ -12,9 +13,8 @@ final class ApiExtension extends CompilerExtension
 
 	/** @var array */
 	public $defaults = [
-		'auto'   => 'true',
-		'routes' => [],
-		'src'    => '',
+		'builder' => NULL,
+		'routes'  => [],
 	];
 
 	/**
@@ -35,18 +35,17 @@ final class ApiExtension extends CompilerExtension
 		$builder->addDefinition('application.presenterFactory')
 			->setClass(ApiDispatcherFactory::class);
 
-		$routes = $config['routes'];
+		$routeBuilder = $config['routeBuilder'];
 
-		if ($config['auto']) {
-			$routeBuilder = $builder->addDefinition($this->prefix('routeBuilder'))
-				->setClass(ApiRouteBuilder::class, [$config['src']]);
-
-			$routes = $routeBuilder->create();
+		if (!$routeBuilder) {
+			$routeBuilder = new ApiRouteBuilder();
+		} elseif ($routeBuilder == 'simple') {
+			$routeBuilder = new SimpleRouteBuilder($config['routes']);
 		}
 
 		$builder->removeDefinition('routing.router');
 		$builder->addDefinition('routing.router')
-			->setClass(ApiRouter::class, [$routes]);
+			->setClass(ApiRouter::class, [$routeBuilder->create($builder)]);
 	}
 
 	/**
@@ -54,7 +53,6 @@ final class ApiExtension extends CompilerExtension
 	 */
 	public function beforeCompile()
 	{
-		//TODO
 		/*$builder = $this->getContainerBuilder();
 
 		foreach ($builder->findByType() as $name => $def) {

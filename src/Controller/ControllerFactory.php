@@ -1,14 +1,16 @@
 <?php
 
-namespace Minetro\Api;
+namespace Minetro\Api\Controller;
 
 use Nette\DI\Container;
 
 class ControllerFactory
 {
 
-    /** @var Container */
-    private $container;
+	/**
+	 * @var Container
+	 */
+	private $container;
 
 	/**
 	 * ControllerFactory constructor.
@@ -16,9 +18,9 @@ class ControllerFactory
 	 * @param Container $container
 	 */
 	public function __construct(Container $container)
-    {
-        $this->container = $container;
-    }
+	{
+		$this->container = $container;
+	}
 
 	/**
 	 * @param string $name
@@ -26,10 +28,10 @@ class ControllerFactory
 	 * @return object
 	 */
 	public function create($name)
-    {
-        $controller = $this->container->getByType($name);
+	{
+		$controller = $this->container->getByType($name);
 
-        return $controller;
-    }
+		return $controller;
+	}
 
 }

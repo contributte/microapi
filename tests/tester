@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+../vendor/bin/tester -p php -d extension=json.so -d extension=mbstring.so -s -j 40 $@
+rm "./tmp" -f -R

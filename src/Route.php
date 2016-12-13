@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Api\Route;
+namespace Minetro\Api;
 
 class Route
 {

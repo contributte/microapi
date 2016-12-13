@@ -1,14 +1,15 @@
 <?php
 
-namespace Minetro\Api;
+namespace Minetro\Api\Dispatcher;
 
+use Minetro\Api\Controller\ControllerFactory;
 use Nette\Application\IPresenterFactory;
 
 class ApiDispatcherFactory implements IPresenterFactory
 {
 
-    /** @var ControllerFactory */
-    private $controllerFactory;
+	/** @var ControllerFactory */
+	private $controllerFactory;
 
 	/**
 	 * ApiDispatcherFactory constructor.
@@ -16,9 +17,9 @@ class ApiDispatcherFactory implements IPresenterFactory
 	 * @param ControllerFactory $controllerFactory
 	 */
 	public function __construct(ControllerFactory $controllerFactory)
-    {
-        $this->controllerFactory = $controllerFactory;
-    }
+	{
+		$this->controllerFactory = $controllerFactory;
+	}
 
 	/**
 	 * @param string $name
@@ -26,9 +27,9 @@ class ApiDispatcherFactory implements IPresenterFactory
 	 * @return mixed
 	 */
 	public function getPresenterClass(& $name)
-    {
-        return ApiDispatcher::class;
-    }
+	{
+		return ApiDispatcher::class;
+	}
 
 	/**
 	 * @param string $name

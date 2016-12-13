@@ -1,7 +1,10 @@
 <?php
 
-namespace Minetro\Api;
+namespace Minetro\Api\Dispatcher;
 
+use Minetro\Api\ApiRequest;
+use Minetro\Api\ApiResponse;
+use Minetro\Api\Controller\ControllerFactory;
 use Nette\Application\IPresenter;
 use Nette\Application\IResponse;
 use Nette\Application\Request;
@@ -9,8 +12,10 @@ use Nette\Application\Request;
 class ApiDispatcher implements IPresenter
 {
 
-    /** @var ControllerFactory */
-    private $controllerFactory;
+	/**
+	 * @var ControllerFactory
+	 */
+	private $controllerFactory;
 
 	/**
 	 * ApiDispatcher constructor.
@@ -18,18 +23,19 @@ class ApiDispatcher implements IPresenter
 	 * @param ControllerFactory $controllerFactory
 	 */
 	public function __construct(ControllerFactory $controllerFactory)
-    {
-        $this->controllerFactory = $controllerFactory;
-    }
+	{
+		$this->controllerFactory = $controllerFactory;
+	}
 
-    /**
-     * @param ApiRequest|Request $request
-     * @return IResponse
-     */
-    public function run(Request $request)
-    {
-        return $this->doRun($request);
-    }
+	/**
+	 * @param ApiRequest|Request $request
+	 *
+	 * @return IResponse
+	 */
+	public function run(Request $request)
+	{
+		return $this->doRun($request);
+	}
 
 	/**
 	 * @param ApiRequest $request
@@ -40,12 +46,14 @@ class ApiDispatcher implements IPresenter
 	{
 		$response = new ApiResponse();
 
+		//TODO validační event
+
 		$controller = $this->controllerFactory->create($request->getPresenterName());
 
-		$action = $request->getAction();
+		$action = 'action' . ucfirst($request->getAction());
 		$controller->$action($request, $response);
 
 		return $response;
-    }
+	}
 
 }
