@@ -13,10 +13,11 @@ class DummyController implements Controller
 	 *
 	 * @param ApiRequest  $request
 	 * @param ApiResponse $response
+	 *
+	 * @return void
 	 */
 	public function actionDefault(ApiRequest $request, ApiResponse $response)
 	{
-
 	}
 
 }

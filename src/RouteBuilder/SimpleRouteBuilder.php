@@ -8,7 +8,7 @@ use Nette\DI\ContainerBuilder;
 class SimpleRouteBuilder implements RouteBuilder
 {
 
-	/*** @var Route[] */
+	/** @var Route[] */
 	private $routes;
 
 	/**

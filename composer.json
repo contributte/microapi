@@ -21,7 +21,8 @@
   },
   "require-dev": {
     "nette/tester": "1.7.0",
-    "mockery/mockery": "^0.9.6"
+    "mockery/mockery": "^0.9.6",
+    "ninjify/qa": "^0.3.3"
   },
   "autoload": {
     "psr-4": {
@@ -32,5 +33,46 @@
     "classmap": [
       "tests/"
     ]
+  },
+  "scripts": {
+    "qa": [
+      "@qa-linter",
+      "@qa-codesniffer"
+    ],
+    "qa-codesniffer": [
+      "Ninjify\\Composer\\Script\\CodeSniffer::execute"
+    ],
+    "qa-codefixer": [
+      "Ninjify\\Composer\\Script\\CodeFixer::execute"
+    ],
+    "qa-linter": [
+      "Ninjify\\Composer\\Script\\Linter::execute"
+    ]
+  },
+  "extra": {
+    "ninjify": {
+      "qa": {
+        "codesniffer": {
+          "ruleset": "nette",
+          "folders": [
+            "src",
+            "tests"
+          ]
+        },
+        "codefixer": {
+          "ruleset": "nette",
+          "folders": [
+            "src",
+            "tests"
+          ]
+        },
+        "linter": {
+          "folders": [
+            "src",
+            "tests"
+          ]
+        }
+      }
+    }
   }
 }
