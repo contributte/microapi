@@ -19,7 +19,7 @@
 |---| --- |
 | Version | ![](https://badgen.net/packagist/v/minetro/api) |
 | PHP | ![](https://badgen.net/packagist/php/minetro/api) |
-| License | ![](https://badgen.net/github/license/minetro/api) |
+| License | ![](https://badgen.net/github/license/contributte/microapi) |
 
 ## Usage
 
