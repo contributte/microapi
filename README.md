@@ -15,7 +15,7 @@
 | :warning: | This project is no longer being maintained. Please use [contributte/apitte](https://github.com/contributte/apitte).
 |---|---|
 
-| Composer | [`minetro/api`](https://packagist.org/minetro/api) |
+| Composer | [`minetro/api`](https://packagist.org/packages/minetro/api) |
 |---| --- |
 | Version | ![](https://badgen.net/packagist/v/minetro/api) |
 | PHP | ![](https://badgen.net/packagist/php/minetro/api) |
